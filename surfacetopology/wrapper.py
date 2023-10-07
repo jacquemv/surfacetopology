@@ -67,7 +67,7 @@ class SurfaceTopology:
 #-----------------------------------------------------------------------------
 def surface_topology(triangles) -> list[SurfaceTopology]:
     """Check the validity and determine the topology of a triangulated 
-    surface (conpact 2-manifold)
+    surface (compact 2-manifold)
 
     Args:
         triangles (nt-by-3 int array): each row is a triangle described by the
