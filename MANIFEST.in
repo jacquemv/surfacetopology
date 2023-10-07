@@ -1,2 +1,2 @@
 graft surfacetopology
-global-exclude *.py[cod] *.so
+global-exclude *.py[cod] *.so create_orientation_table.py
