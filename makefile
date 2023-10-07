@@ -3,7 +3,15 @@ all:
 
 local:
 	python setup.py build_ext -i
-	mv *.so surfacetopology
+
+sdist:
+	python setup.py sdist
+
+check: sdist
+	twine check dist/*
+
+upload: sdist
+	twine upload dist/*
 
 clean:
 	rm -rf build dist *.egg-info
