@@ -1,11 +1,11 @@
 ### Triangulated compact manifolds
 
-A triangulated surface composed of $n_v$ vertices and $n_t$ triangles can be specified by a 3-by-$n_t$ matrix of vertex indices ranging from 0 to $n_v-1$. Each row contains the index of the three vertices of a triangle. This representation is less general than a simplicial complex, but is more convenient and widespread for large meshes. Note that the vertex positions are not needed since only topological properties are considered.
+The connectivity of a triangulated surface composed of $n_v$ vertices and $n_t$ triangles can be specified by a 3-by-$n_t$ matrix of vertex indices ranging from 0 to $n_v-1$. Each row contains the index of the three vertices of a triangle. This representation is less general than a simplicial complex, but is more convenient and widespread for large meshes. Note that the vertex positions are not needed since only topological properties are considered.
 
-This triangulation describes a compact manifold surface if:
+This triangulation describes a compact manifold surface if and only if:
 1. every triangle has 3 distinct vertices;
 2. every edge is adjacent to 1 or 2 triangles;
-3. the set of triangles adjacent to every vertex form a closed or open fan.
+3. the set of triangles adjacent to any vertex forms a closed or open fan.
 
 A fan is a collection of triangles sharing a common vertex and chained 
 together by a sequence of shared edges.
@@ -31,7 +31,7 @@ The function `surface_topology` separates the connected components and provides 
 euler=2, genus=0, manifold=True, oriented=True, closed=True)]
 ```
 
-If a surface has multiple connected component (here artificially generated using ``disjoint_sum``), a list of ``SurfaceTopology`` are returned. When there are isolated vertices, a large number of connected components of size 1 may be generated. In that case, it is useful to call the function ``renumber_vertices`` first.
+If a surface has multiple connected components (here artificially generated using ``disjoint_sum``), a list of ``SurfaceTopology`` objects are returned. When there are isolated vertices, a large number of connected components of size 1 may be generated. In that case, it is useful to call the function ``renumber_vertices`` first.
 
 ```python
 >>> S2 = topo.small_mesh('torus')
@@ -43,7 +43,7 @@ If a surface has multiple connected component (here artificially generated using
 3
 ```
 
-If a surface is not oriented, the orientability will be checked by attempting to fic the orientation (in the attribute ``triangles`` if the surface turns out to be orientable). Here, the Moebius strip is not orientable and has genus 1.
+If a surface is not oriented, the orientability will be checked by attempting to fix the orientation (stored in the attribute ``triangles`` if the surface turns out to be orientable). Here, the Moebius strip is not orientable and has genus 1.
 
 ```python
 >>> S3 = topo.small_mesh('moebius')
@@ -52,7 +52,7 @@ If a surface is not oriented, the orientability will be checked by attempting to
 euler=0, genus=1, manifold=True, oriented=False, orientable=False, closed=False)]
 ```
 
-Surface with higher genus can be generated using ``connected_sum``
+Surfaces with higher genus can be generated using ``connected_sum``
 
 ```python
 >>> S = topo.connected_sum(S2, S2, S2)
@@ -66,3 +66,9 @@ In case ``manifold`` is false, the ``SurfaceTopology`` object contains attribute
 ### Implementation
 
 The code is implemented in C++, interfaced and compiled using ``cython``, and with a wrapper for python (``surfacetopology/wrapper.py``). It was designed for meshes with 100k vertices, but should be appropriate for 1M vertices.
+
+### Installation
+
+Can be installed using the command ``pip install surfacetopology`` (on Windows, a compiler such as Microsoft Visual C++ is required).
+
+Tested using Anaconda 2023.09 (python 3.11) on Linux and Windows.
