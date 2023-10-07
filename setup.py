@@ -4,7 +4,7 @@ from Cython.Distutils import build_ext
 NAME = "surfacetopology"
 VERSION = "0.1.0"
 DESCR = "Check the validity and determine the topology of a triangulated surface"
-URL = "http://"
+URL = "https://github.com/jacquemv/surfacetopology"
 REQUIRES = ['numpy', 'cython']
 
 AUTHOR = "Vincent Jacquemet"
